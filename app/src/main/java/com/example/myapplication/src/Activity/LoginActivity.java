@@ -19,6 +19,7 @@ import com.example.myapplication.models.user_reponse.UserReponse;
 import com.example.myapplication.services.APIServices;
 import com.example.myapplication.services.DataService;
 import com.example.myapplication.src.dialog.LoadingDialog;
+import com.example.myapplication.util.ShaPrefs;
 import com.example.myapplication.util.listener_change_edittext.addListenerOnTextChange;
 import com.example.myapplication.util.validations.Validations;
 import com.google.gson.Gson;
@@ -34,15 +35,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextView txtForgetPass;
     private Button btnLogin;
     final LoadingDialog loadingDialog = new LoadingDialog();
-    public static SharedPreferences sharedPreferences;
-    public static SharedPreferences.Editor editor;
+    private ShaPrefs mShaPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         anhxa();
-        if(checkUserAcount()){
+        if(mShaPrefs.checkUserAcount()){
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_ride);
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
@@ -96,13 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("AAA","postLogin: "+response.toString());
                             loadingDialog.dismiss();
                            if(response.isSuccessful()){
-                               User user = response.body().getUser();
-                               editor.putString("username",user.getName());
-                               editor.putString("password",user.getPassword());
-                               editor.putInt("idUser",user.getId());
-                               String json = new Gson().toJson(user);
-                               editor.putString("user",json);
-                               editor.commit();
+                               mShaPrefs.saveUser(new Gson().toJson(response.body().getUser()));
                                
                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_ride);
                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -127,9 +121,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void anhxa() {
-        sharedPreferences = getSharedPreferences("datalogin",MODE_PRIVATE);
-        editor=sharedPreferences.edit();
-
+        mShaPrefs = ShaPrefs.getInstance(this);
         txtForgetPass = findViewById(R.id.txtForgetPass);
         mBtRegister = findViewById(R.id.btRegister);
         editTextUserName = findViewById(R.id.editTextUserName);
@@ -137,13 +129,4 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
     }
 
-    static public boolean checkUserAcount(){
-        if(sharedPreferences.getString("username","") != null &&
-                sharedPreferences.getString("password","") != null &&
-                sharedPreferences.getInt("idUser",0) != 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
 }

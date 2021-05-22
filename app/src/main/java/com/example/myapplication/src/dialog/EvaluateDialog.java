@@ -16,10 +16,13 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.R;
+import com.example.myapplication.models.user_reponse.User;
 import com.example.myapplication.services.APIServices;
 import com.example.myapplication.services.DataService;
 import com.example.myapplication.src.Activity.LoginActivity;
 import com.example.myapplication.src.Activity.MainActivity;
+import com.example.myapplication.util.ShaPrefs;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +35,7 @@ public class EvaluateDialog extends DialogFragment {
     private Button btnEvaluate;
     private int idPlace;
     private  LoadingDialog loadingDialog = new LoadingDialog();
+    private ShaPrefs mShaPrefs;
 
 
     public EvaluateDialog(int id){
@@ -52,7 +56,8 @@ public class EvaluateDialog extends DialogFragment {
             @Override
             public void onClick(final View view) {
                 loadingDialog.show(fragmentManager,"123");
-                int idUser = LoginActivity.sharedPreferences.getInt("idUser",0);
+                User user = new Gson().fromJson(mShaPrefs.getUser(),User.class);
+                int idUser = user.getId();
 
                 if(idUser != 0 && !edtEvaluate.getText().toString().equals("")){
                     int rating = (int) ratingMedium.getRating();
@@ -88,6 +93,7 @@ public class EvaluateDialog extends DialogFragment {
     }
 
     private void anhxa() {
+        mShaPrefs = ShaPrefs.getInstance(requireContext());
         ratingMedium = view.findViewById(R.id.ratingMedium);
         edtEvaluate = view.findViewById(R.id.edtEvaluate);
         btnEvaluate = view.findViewById(R.id.btnEvaluate);

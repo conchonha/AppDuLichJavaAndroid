@@ -13,17 +13,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.models.user_reponse.User;
 import com.example.myapplication.src.dialog.LoadingDialog_new;
 import com.example.myapplication.src.Activity.HelpsSuport;
 import com.example.myapplication.src.Activity.LoginActivity;
 import com.example.myapplication.src.Activity.MainActivity;
 import com.example.myapplication.src.Activity.Myprofile;
+import com.example.myapplication.util.ShaPrefs;
 import com.example.myapplication.util.constants.Constants;
+import com.google.gson.Gson;
 
 public class Account_Fragment extends Fragment {
     private View mView;
     private RelativeLayout relativeAcountMyprofile,relivelayouhelps_supporrt,relivelayoutabout,relivelayoutlogout;
     private TextView txttenuser;
+    private ShaPrefs mShaPrefs;
+    private User mUser;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,18 +62,19 @@ public class Account_Fragment extends Fragment {
         relivelayoutlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginActivity.editor.clear();
-                LoginActivity.editor.commit();
+                mShaPrefs.clear();
                 startActivity(new Intent(getContext(),LoginActivity.class));
                 getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_ride);
+                getActivity().finish();
             }
         });
     }
 
     private void init() {
+        mShaPrefs = ShaPrefs.getInstance(getContext());
         txttenuser = mView.findViewById(R.id.txttenuser);
-        String nameUser = LoginActivity.sharedPreferences.getString("username","");
-        txttenuser.setText(nameUser);
+        mUser = new Gson().fromJson(mShaPrefs.getUser(),User.class);
+        txttenuser.setText(mUser.getName());
 
         relivelayoutlogout = mView.findViewById(R.id.relivelayoutlogout);
         relivelayoutabout = mView.findViewById(R.id.relivelayoutabout);

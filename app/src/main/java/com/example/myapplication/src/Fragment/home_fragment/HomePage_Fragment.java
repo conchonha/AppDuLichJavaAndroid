@@ -31,6 +31,7 @@ import com.example.myapplication.src.Activity.LoginActivity;
 import com.example.myapplication.src.Activity.MapActivity;
 import com.example.myapplication.src.Activity.Myprofile;
 import com.example.myapplication.src.Adapter.fragment_home_adapter.AdapterRecyclerviewMenu;
+import com.example.myapplication.util.ShaPrefs;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.Gson;
@@ -51,6 +52,7 @@ public class HomePage_Fragment extends Fragment {
     private DrawerLayout drawerlayout;
     private ImageView imgDrawer,imgSearch;
     private TextView txttennguoidung,txtgmail;
+    private ShaPrefs mShaPrefs;
 
     @Nullable
     @Override
@@ -95,8 +97,7 @@ public class HomePage_Fragment extends Fragment {
         mView.findViewById(R.id.mCardLogout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginActivity.editor.clear();
-                LoginActivity.editor.commit();
+                mShaPrefs.clear();
                 startActivity(new Intent(getContext(),LoginActivity.class));
                 getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_ride);
             }
@@ -141,6 +142,7 @@ public class HomePage_Fragment extends Fragment {
     }
 
     private void init() {
+        mShaPrefs = ShaPrefs.getInstance(requireContext());
         mCollapsingToolbarLayout = mView.findViewById(R.id.collapsingtoolbarlayout);
         //Expanded set màu mở rộng
 
@@ -157,7 +159,7 @@ public class HomePage_Fragment extends Fragment {
         animationAppBarDown(mAppBarLayout);
 
         //set data navigation view
-        User user =new Gson().fromJson(LoginActivity.sharedPreferences.getString("user",""),User.class);
+        User user =new Gson().fromJson(mShaPrefs.getUser(),User.class);
         txttennguoidung = mView.findViewById(R.id.txttennguoidung);
         txtgmail = mView.findViewById(R.id.txtgmail);
 

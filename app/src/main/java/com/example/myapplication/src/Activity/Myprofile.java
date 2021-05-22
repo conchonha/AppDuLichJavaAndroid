@@ -15,6 +15,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.models.user_reponse.User;
 import com.example.myapplication.services.APIServices;
 import com.example.myapplication.services.DataService;
+import com.example.myapplication.util.ShaPrefs;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -27,6 +28,7 @@ public class Myprofile extends AppCompatActivity {
     private ImageView imgback;
     private TextView mTxtUpdate;
     private User user;
+    private ShaPrefs ShaPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,8 @@ public class Myprofile extends AppCompatActivity {
                                 user.setAge(txtage.getText().toString());
                                 user.setGender(txtgender.getText().toString().equals("Boy") ? 0 : 1);
                                 String json = new Gson().toJson(user);
-                                LoginActivity.editor.putString("user",json);
-                                LoginActivity.editor.commit();
+                                Log.d("AAAA", "onResponse: "+json);
+                                ShaPrefs.saveUser(json);
                                 Toast.makeText(Myprofile.this, "Update Success", Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(Myprofile.this, "Update Error", Toast.LENGTH_SHORT).show();
@@ -80,7 +82,7 @@ public class Myprofile extends AppCompatActivity {
 
 
     private void setData() {
-        user = new Gson().fromJson(LoginActivity.sharedPreferences.getString("user",""),User.class);
+        user = new Gson().fromJson(ShaPrefs.getUser(),User.class);
         txtusername.setText(user.getName());
         txtsdt.setText(user.getPhone()+"");
         txtemail.setText(user.getEmail());
@@ -93,6 +95,7 @@ public class Myprofile extends AppCompatActivity {
 
 
     private void anhxa() {
+        ShaPrefs = com.example.myapplication.util.ShaPrefs.getInstance(this);
         mTxtUpdate = findViewById(R.id.mTxtUpdate);
         txtgender = findViewById(R.id.txtgender);
         txtage = findViewById(R.id.txtage);

@@ -21,14 +21,17 @@ import com.example.myapplication.R;
 import com.example.myapplication.models.details_reponse.DataEvaluate;
 import com.example.myapplication.models.details_reponse.DetailsReponse;
 import com.example.myapplication.models.place_reponse.Place;
+import com.example.myapplication.models.user_reponse.User;
 import com.example.myapplication.services.APIServices;
 import com.example.myapplication.services.DataService;
 import com.example.myapplication.src.Adapter.AdapterRecyclerviewComment;
 import com.example.myapplication.src.dialog.EvaluateDialog;
 import com.example.myapplication.src.dialog.LoadingDialog;
 import com.example.myapplication.src.Adapter.AdapterRecyclerviewImage;
+import com.example.myapplication.util.ShaPrefs;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -53,6 +56,7 @@ public class DetailActivity extends AppCompatActivity {
     private boolean check = false;
     private ArrayList<DataEvaluate> arrayListEvaluate;
     private AdapterRecyclerviewComment adapter;
+    private ShaPrefs mShaPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +109,8 @@ public class DetailActivity extends AppCompatActivity {
         imgLikeEvaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                int idUser = LoginActivity.sharedPreferences.getInt("idUser", 0);
+                User user = new Gson().fromJson(mShaPrefs.getUser(),User.class);
+                int idUser = user.getId();
                 final LoadingDialog loadingDialog = new LoadingDialog();
                 loadingDialog.show(fragmentManager, "123");
                 if (idUser != 0) {
@@ -225,6 +230,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void init() {
+        mShaPrefs = ShaPrefs.getInstance(this);
         txtSeemoreComment = findViewById(R.id.txtSeemoreComment);
         recyclerviewComment = findViewById(R.id.recyclerviewComment);
         imgMapDetail = findViewById(R.id.imgMapDetail);
