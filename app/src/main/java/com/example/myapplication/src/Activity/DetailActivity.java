@@ -182,7 +182,7 @@ public class DetailActivity extends AppCompatActivity {
                         mtxtIntroduce.setText(arrayList.get(0).getIntroduce());
                         mTxtOverView.setText(arrayList.get(0).getOverview());
                         txtNameDetail.setText(arrayList.get(0).getName());
-                        setDataRecyclerview(arrayList.get(0).getArrayImageView());
+                        viewPagerPlace(arrayList.get(0).getArrayImageView());
                     }
                 }
 
@@ -209,7 +209,7 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    private void setDataRecyclerview(String arrayImageView) {
+    private void viewPagerPlace(String arrayImageView) {
         if (arrayImageView.length() > 0) {
             String[] arr = arrayImageView.split("@");
             ArrayList<Place> arrayList = new ArrayList<>();

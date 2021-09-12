@@ -1,5 +1,4 @@
 package com.example.myapplication.services;
-import com.example.myapplication.models.details_reponse.DataEvaluate;
 import com.example.myapplication.models.details_reponse.DetailsReponse;
 import com.example.myapplication.models.event_reponse.EventReponse;
 import com.example.myapplication.models.menu_reponse.MenuReponse;

@@ -21,6 +21,10 @@ android {
         }
     }
 
+    buildFeatures{
+        viewBinding true
+    }
+
 }
 
 dependencies {
@@ -50,4 +54,7 @@ dependencies {
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
+
+    // thư viện fake random
+    implementation 'com.github.moove-it:fakeit:v0.5'
 }

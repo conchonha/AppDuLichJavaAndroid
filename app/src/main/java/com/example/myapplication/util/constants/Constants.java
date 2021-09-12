@@ -9,6 +9,4 @@ public class Constants {
     public static  String PASS = "123@Abc#";
 
     public static String mAbout = "Height or weight invalidate,Height or weight invalidate,Height or weight invalidate";
-
-
 }

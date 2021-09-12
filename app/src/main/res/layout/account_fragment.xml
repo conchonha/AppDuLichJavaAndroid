@@ -72,21 +72,23 @@
                 android:id="@+id/relativeAcountMyprofile"
                 android:padding="10dp"
                 android:layout_height="wrap_content">
+
                 <ImageView
-                    android:layout_width="30dp"
-                    android:src="@drawable/ic_user_confirm"
                     android:id="@+id/imghinhicon2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_height="30dp"/>
+                    android:src="@drawable/ic_user_confirm" />
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_toRightOf="@+id/imghinhicon2"
                     android:layout_height="30dp"
-                    android:text="My profile"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imghinhicon2"
+                    android:gravity="center"
+                    android:text="My profile"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:text=">"
@@ -111,22 +113,24 @@
                 android:padding="10dp"
                 android:id="@+id/relivelayouhelps_supporrt"
                 android:layout_height="wrap_content">
+
                 <ImageView
-                    android:layout_width="30dp"
-                    android:src="@drawable/ic_help"
-                    android:scaleType="fitXY"
                     android:id="@+id/imghinhicon1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_height="30dp"/>
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_help" />
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/imghinhicon1"
-                    android:layout_height="30dp"
-                    android:text="Help - Support"/>
+                    android:gravity="center"
+                    android:text="Help - Support"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:text=">"
@@ -157,15 +161,16 @@
                     android:id="@+id/imghinhicon3"
                     android:layout_marginLeft="10dp"
                     android:layout_height="30dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_toRightOf="@+id/imghinhicon3"
                     android:layout_height="30dp"
-                    android:text="About"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imghinhicon3"
+                    android:gravity="center"
+                    android:text="About"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:text=">"
@@ -196,15 +201,16 @@
                     android:id="@+id/imghinhicon4"
                     android:layout_marginLeft="10dp"
                     android:layout_height="30dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/imghinhicon4"
-                    android:layout_height="30dp"
-                    android:text="Setting"/>
+                    android:gravity="center"
+                    android:text="Setting"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:text=">"

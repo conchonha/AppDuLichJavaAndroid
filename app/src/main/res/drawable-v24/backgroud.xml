@@ -4,7 +4,7 @@
         android:centerY="@android:integer/config_longAnimTime"
         android:centerX="@android:integer/config_shortAnimTime"
         android:startColor="@color/balck"
-        android:centerColor="@color/balck"
+        android:centerColor="#232323"
         android:endColor="@color/blue"
         android:angle="-90">
     </gradient>
